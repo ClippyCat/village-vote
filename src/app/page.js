@@ -1,17 +1,15 @@
+import React from 'react'; // Import React
 import Head from 'next/head';
-import CreatePoll from '../components/CreatePoll';
+import Link from 'next/link'; // Import Link from Next.js
 
-const CreatePollPage = () => {
+const Page = () => {
   return (
     <div>
-      <Head>
-        <title>Create Poll - Your Voting App</title>
-      </Head>
       <main>
-        <CreatePoll />
+        <Link href="/create">Create new poll</Link>
       </main>
     </div>
   );
 };
 
-export default CreatePollPage;
+export default Page;
