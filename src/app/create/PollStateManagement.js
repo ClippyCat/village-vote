@@ -59,9 +59,9 @@ const PollStateManagement = ({ children }) => {
     }));
   };
 
-  const handleTimeChange = (qIndex, oIndex, startTime) => {
+  const handleTimeChange = (qIndex, oIndex, time) => {
     const questions = [...pollData.questions];
-    questions[qIndex].options[oIndex].startTime = startTime;
+    questions[qIndex].options[oIndex].time = time;
     setPollData((prevData) => ({
       ...prevData,
       questions,

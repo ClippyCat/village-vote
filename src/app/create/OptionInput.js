@@ -67,8 +67,6 @@ const OptionInput = ({ option, qIndex, oIndex, handleOptionChange, handleDateCha
             required
           />
         </label>
-        {/* Include other option input fields (startTime, endTime, timezone) */}
-        {/* Add or remove options */}
         <button onClick={() => removeOption(qIndex, oIndex)}>Remove Option</button>
       </div>
     );
