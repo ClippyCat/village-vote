@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 
-const CreatePollHeader = ({ title, handleInputChange, addQuestion }) => {
+const CreatePollHeader = ({ title, handleInputChange }) => {
   return (
     <div>
       <h2>Create a new poll</h2>
@@ -15,7 +15,6 @@ const CreatePollHeader = ({ title, handleInputChange, addQuestion }) => {
           required
         />
       </label>
-      <button onClick={addQuestion}>Add Question</button>
     </div>
   );
 };

@@ -26,7 +26,7 @@ const CreatePoll = () => {
         removeOption,
       }) => (
         <div>
-          <CreatePollHeader title={pollData.title} handleInputChange={handleInputChange} addQuestion={addQuestion} />
+          <CreatePollHeader title={pollData.title} handleInputChange={handleInputChange} />
 
           {pollData.questions.map((question, qIndex) => (
             <div key={qIndex}>
@@ -57,6 +57,7 @@ const CreatePoll = () => {
               <button onClick={() => addOption(qIndex, true)}>Add Date Option</button>
               {qIndex > 0 && (
                 <button onClick={() => removeQuestion(qIndex)}>Remove Question</button>
+                <button onClick={addQuestion}>Add Question</button>
               )}
             </div>
           ))}

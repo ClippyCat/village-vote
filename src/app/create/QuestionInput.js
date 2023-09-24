@@ -4,6 +4,7 @@ import React, { useState } from "react";
 const QuestionInput = ({ question, qIndex, handleQuestionChange, handleQuestionTypeChange, handleCalendarChange }) => {
   return (
     <div>
+      <h3>Question {qIndex + 1}</h3>
       <label>
         Question {qIndex + 1}:
         <input
