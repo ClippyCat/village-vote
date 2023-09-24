@@ -12,7 +12,7 @@ Note: You will need to set the `DATABASE_URL` environemnt variable to be able to
 
 There is a `.env` file in the directory that you can import to use the standard database for migrations: `source .env` should import the environment variables when using the `bash` shell.
 
-### Windows Powershell
+### Windows PowerShell
 
-There is a `.env.ps1` file in the directory that you can import to use for the standard database migration: `.\.env.ps1` should import the enviroment variabels used when running `sqlx`.
+There is a `.env.ps1` file in the directory that you can import to use for the standard database migration: `.\.env.ps1` should import the environment variables used when running `sqlx`.
 
