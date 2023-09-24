@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 
 const timezones = Intl.supportedValuesOf("timeZone");
+const localTime = Intl.DateTimeFormat().resolvedOptions().timeZone;
 const OptionInput = ({ option, qIndex, oIndex, handleOptionChange, handleDateChange, handleTimeChange, handleLengthChange, handleTimezoneChange, removeOption }) => {
   if (option.calendar) {
     return (
@@ -43,7 +44,7 @@ const OptionInput = ({ option, qIndex, oIndex, handleOptionChange, handleDateCha
             onChange={(e) => handleTimezoneChange(qIndex, oIndex, e.target.value)}
           >
             {timezones.map((tz) => (
-              <option key={tz} value={tz}>
+              <option key={tz} value={tz} selected={{tz} === localTime ? true : undefined}>
                 {tz}
               </option>
             ))}
