@@ -2,7 +2,7 @@
 
 To run this project using the default database, use `cargo run` within the `village-vote-backend` directory.
 
-If you have altered the code to use another database, we recommend using `sqlx` to run the database migrations first. `sqlx mig run`.
+But first, you must migrate the database:
 
 ## Database Migrations
 
