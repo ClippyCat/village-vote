@@ -7,7 +7,7 @@ const data = {
     {
       text: "q1",
       options: ["a1", "a2"],
-      type: "singleSelect"
+      type: "singleSelect",
     },
     {
       text: "q2",
@@ -17,19 +17,44 @@ const data = {
           time: "00:00",
           length: "30",
           timezone: "America/Edmonton",
-          calendar: true
+          calendar: true,
         },
         {
           date: "2024-02-29",
           time: "18:09",
           length: "420",
           timezone: "America/Edmonton",
-          calendar: true
-        }
+          calendar: true,
+        },
       ],
-      type: "multiSelect"
-    }
-  ]
+      type: "singleSelect",
+    },
+    {
+      text: "q3",
+      options: ["a1", "a2"],
+      type: "multiSelect",
+    },
+    {
+      text: "q4",
+      options: [
+        {
+          date: "2030-11-11",
+          time: "23:00",
+          length: "55",
+          timezone: "America/Edmonton",
+          calendar: true,
+        },
+        {
+          date: "2024-02-29",
+          time: "18:09",
+          length: "420",
+          timezone: "America/Edmonton",
+          calendar: true,
+        },
+      ],
+      type: "multiSelect",
+    },
+  ],
 };
 
 const Vote = () => {
@@ -39,9 +64,9 @@ const Vote = () => {
       {data.questions.map((question, index) => (
         <div key={index}>
           <h2>{question.text}</h2>
-          {question.type === 'singleSelect' ? (
+          {question.type === "singleSelect" ? (
             <SingleSelectOptions options={question.options} />
-          ) : question.type === 'multiSelect' ? (
+          ) : question.type === "multiSelect" ? (
             <MultiSelectOptions options={question.options} />
           ) : null}
         </div>
@@ -56,7 +81,9 @@ const SingleSelectOptions = ({ options }) => {
       {options.map((option, index) => (
         <label key={index}>
           <input type="radio" name={`singleSelectOption`} value={option} />
-          {option}
+          {typeof option === "object"
+            ? `${option.date} ${option.time}`
+            : option}
         </label>
       ))}
     </div>
@@ -69,7 +96,7 @@ const MultiSelectOptions = ({ options }) => {
       {options.map((option, index) => (
         <label key={index}>
           <input type="checkbox" name={`multiSelectOption`} value={option} />
-          {option.date && option.time
+          {typeof option === "object"
             ? `${option.date} ${option.time}`
             : option}
         </label>
