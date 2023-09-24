@@ -6,7 +6,11 @@ const Page = () => {
   return (
     <div>
       <main>
-        <Link href="/create">Create new poll</Link>
+      <h1>Wellcome to VillageVote!</h1>
+        <ul>
+          <li><Link href="/create">Create new poll</Link></li>
+          <li><Link href="https://github.com/ClippyCat/village-vote">VillageVote on Github</Link></li>
+        </ul>
       </main>
     </div>
   );

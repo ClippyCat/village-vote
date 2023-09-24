@@ -4,7 +4,7 @@ import React, { useState } from "react";
 const CreatePollHeader = ({ title, handleInputChange }) => {
   return (
     <div>
-      <h2>Create a new poll</h2>
+      <h1>Create a new poll</h1>
       <label>
         Title:
         <input
