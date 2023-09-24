@@ -57,11 +57,11 @@ const CreatePoll = () => {
               <button onClick={() => addOption(qIndex, true)}>Add Date Option</button>
               {qIndex > 0 && (
                 <button onClick={() => removeQuestion(qIndex)}>Remove Question</button>
-                <button onClick={addQuestion}>Add Question</button>
               )}
             </div>
           ))}
 
+          <button onClick={() => addQuestion()}>Add Question</button>
           <ExportJSON data={pollData} />
         </div>
       )}
