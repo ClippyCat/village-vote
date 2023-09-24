@@ -38,8 +38,7 @@ const CreatePoll = () => {
                 handleCalendarChange={handleCalendarChange}
               />
 
-              {question.calendar &&
-                question.options.map((option, oIndex) => (
+              {question.options.map((option, oIndex) => (
                   <OptionInput
                     key={oIndex}
                     option={option}
