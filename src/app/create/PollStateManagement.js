@@ -68,9 +68,9 @@ const PollStateManagement = ({ children }) => {
     }));
   };
 
-  const handleLengthChange = (qIndex, oIndex, startLength) => {
+  const handleLengthChange = (qIndex, oIndex, length) => {
     const questions = [...pollData.questions];
-    questions[qIndex].options[oIndex].startLength = startLength;
+    questions[qIndex].options[oIndex].length = length;
     setPollData((prevData) => ({
       ...prevData,
       questions,
