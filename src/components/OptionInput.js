@@ -24,7 +24,7 @@ const OptionInput = ({ option, qIndex, oIndex, handleOptionChange, handleDateCha
     return (
       <div>
         <label>
-          Option {oIndex + 1} Date:
+          Option {oIndex + 1}:
           <input
             type="text"
             name={`option-${qIndex}-${oIndex}`}
