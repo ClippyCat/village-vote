@@ -8,11 +8,29 @@ const OptionInput = ({ option, qIndex, oIndex, handleOptionChange, handleDateCha
         <label>
           Option {oIndex + 1} Date:
           <input
-            type="datetime-local"
+            type="date"
             name={`date-${qIndex}-${oIndex}`}
             value={option.date}
             onChange={(e) => handleDateChange(qIndex, oIndex, e.target.value)}
             required
+          />
+        </label>
+        <label>
+          Time:
+          <input
+            type="time"
+            name={`time-${qIndex}-${oIndex}`}
+            value={option.time}
+            onChange={(e) => handleDateChange(qIndex, oIndex, e.target.value)}
+          />
+        </label>
+        <label>
+          Length:
+          <input
+            type="time"
+            name={`length-${qIndex}-${oIndex}`}
+            value={option.length}
+            onChange={(e) => handleDateChange(qIndex, oIndex, e.target.value)}
           />
         </label>
         {/* Include other option input fields (startTime, endTime, timezone) */}
