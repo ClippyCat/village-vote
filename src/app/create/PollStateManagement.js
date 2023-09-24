@@ -4,7 +4,7 @@ import React, { useState } from "react";
 const PollStateManagement = ({ children }) => {
   const [pollData, setPollData] = useState({
     title: "",
-    questions: [{ text: "", options: [{ date: "", startTime: "", endTime: "", timezone: "" }] }],
+    questions: [{ text: "", options: [{ date: "", time: "", length: "", timezone: "" }] }],
   });
 
   const handleInputChange = (name, value) => {
@@ -59,7 +59,7 @@ const PollStateManagement = ({ children }) => {
     }));
   };
 
-  const handleStartTimeChange = (qIndex, oIndex, startTime) => {
+  const handleTimeChange = (qIndex, oIndex, startTime) => {
     const questions = [...pollData.questions];
     questions[qIndex].options[oIndex].startTime = startTime;
     setPollData((prevData) => ({
@@ -68,9 +68,9 @@ const PollStateManagement = ({ children }) => {
     }));
   };
 
-  const handleEndTimeChange = (qIndex, oIndex, endTime) => {
+  const handleLengthChange = (qIndex, oIndex, startLength) => {
     const questions = [...pollData.questions];
-    questions[qIndex].options[oIndex].endTime = endTime;
+    questions[qIndex].options[oIndex].startLength = startLength;
     setPollData((prevData) => ({
       ...prevData,
       questions,
@@ -87,7 +87,7 @@ const PollStateManagement = ({ children }) => {
   };
 
   const addQuestion = () => {
-    const questions = [...pollData.questions, { text: "", options: [{ date: "", startTime: "", endTime: "", timezone: "" }] }];
+    const questions = [...pollData.questions, { text: "", options: [{ date: "", time: "", length: "", timezone: "" }] }];
     setPollData((prevData) => ({
       ...prevData,
       questions,
@@ -105,9 +105,9 @@ const PollStateManagement = ({ children }) => {
     }
   };
 
-  const addOption = (qIndex, date) => {
+  const addOption = (qIndex, isCalendar) => {
     const questions = [...pollData.questions];
-    questions[qIndex].options.push({ date: "", time: "", length: "", startTime: "", endTime: "", timezone: "", calendar: date });
+    questions[qIndex].options.push({ date: "", time: "", length: "", timezone: "", calendar: isCalendar });
     setPollData((prevData) => ({
       ...prevData,
       questions,
@@ -135,8 +135,8 @@ const PollStateManagement = ({ children }) => {
         handleCalendarChange,
         handleOptionChange,
         handleDateChange,
-        handleStartTimeChange,
-        handleEndTimeChange,
+        handleTimeChange,
+        handleLengthChange,
         handleTimezoneChange,
         addQuestion,
         removeQuestion,

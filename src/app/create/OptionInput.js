@@ -28,14 +28,12 @@ const OptionInput = ({ option, qIndex, oIndex, handleOptionChange, handleDateCha
         <label>
           Length:
           <input
-            type="time"
+            type="number"
             name={`length-${qIndex}-${oIndex}`}
             value={option.length}
             onChange={(e) => handleDateChange(qIndex, oIndex, e.target.value)}
           />
         </label>
-        {/* Include other option input fields (startTime, endTime, timezone) */}
-        {/* Add or remove options */}
         <button onClick={() => removeOption(qIndex, oIndex)}>Remove Option</button>
       </div>
     );

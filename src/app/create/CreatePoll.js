@@ -17,8 +17,8 @@ const CreatePoll = () => {
         handleCalendarChange,
         handleOptionChange,
         handleDateChange,
-        handleStartTimeChange,
-        handleEndTimeChange,
+        handleTimeChange,
+        handleLengthChange,
         handleTimezoneChange,
         addQuestion,
         removeQuestion,
@@ -46,8 +46,8 @@ const CreatePoll = () => {
                     oIndex={oIndex}
                     handleOptionChange={handleOptionChange}
                     handleDateChange={handleDateChange}
-                    handleStartTimeChange={handleStartTimeChange}
-                    handleEndTimeChange={handleEndTimeChange}
+                    handleTimeChange={handleTimeChange}
+                    handleLengthChange={handleLengthChange}
                     handleTimezoneChange={handleTimezoneChange}
                     removeOption={removeOption}
                   />
