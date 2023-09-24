@@ -26,15 +26,6 @@ const QuestionInput = ({ question, qIndex, handleQuestionChange, handleQuestionT
           <option value="rank">Rank</option>
         </select>
       </label>
-      <label>
-        Calendar:
-        <input
-          type="checkbox"
-          name={`calendar-${qIndex}`}
-          checked={question.calendar}
-          onChange={(e) => handleCalendarChange(qIndex, e.target.checked)}
-        />
-      </label>
     </div>
   );
 };
