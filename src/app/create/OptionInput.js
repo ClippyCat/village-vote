@@ -40,11 +40,11 @@ const OptionInput = ({ option, qIndex, oIndex, handleOptionChange, handleDateCha
           Timezone:
           <select
             name={`timezone-${qIndex}-${oIndex}`}
-            value={option.timezone}
+            value={option.timezone || localTime}
             onChange={(e) => handleTimezoneChange(qIndex, oIndex, e.target.value)}
           >
             {timezones.map((tz) => (
-              <option key={tz} value={tz} selected={{tz} === localTime ? true : undefined}>
+              <option key={tz} value={tz}>
                 {tz}
               </option>
             ))}
