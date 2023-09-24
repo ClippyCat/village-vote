@@ -105,9 +105,9 @@ const PollStateManagement = ({ children }) => {
     }
   };
 
-  const addOption = (qIndex) => {
+  const addOption = (qIndex, date) => {
     const questions = [...pollData.questions];
-    questions[qIndex].options.push({ date: "", startTime: "", endTime: "", timezone: "" });
+    questions[qIndex].options.push({ date: "", startTime: "", endTime: "", timezone: "", calendar: date });
     setPollData((prevData) => ({
       ...prevData,
       questions,
