@@ -37,3 +37,4 @@ next-env.d.ts
 # Rust target
 village-vote-backend/target
 village-vote-backend/Cargo.lock
+vilalge-vote-backend/polls.db
