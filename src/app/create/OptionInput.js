@@ -5,6 +5,7 @@ const OptionInput = ({ option, qIndex, oIndex, handleOptionChange, handleDateCha
   if (option.calendar) {
     return (
       <div>
+        <h4>Option {oIndex + 1}</h4>
         <label>
           Option {oIndex + 1} Date:
           <input
@@ -41,6 +42,7 @@ const OptionInput = ({ option, qIndex, oIndex, handleOptionChange, handleDateCha
   } else {
     return (
       <div>
+        <h4>Option {oIndex + 1}</h4>
         <label>
           Option {oIndex + 1}:
           <input
