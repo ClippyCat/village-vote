@@ -1,6 +1,8 @@
 "use client";
 import React, { useState } from "react";
 
+const localTime = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
 const PollStateManagement = ({ children }) => {
   const [pollData, setPollData] = useState({
     title: "",
@@ -107,7 +109,7 @@ const PollStateManagement = ({ children }) => {
 
   const addOption = (qIndex, isCalendar) => {
     const questions = [...pollData.questions];
-    questions[qIndex].options.push({ date: "", time: "", length: "", timezone: "", calendar: isCalendar });
+    questions[qIndex].options.push({ date: "", time: "", length: "", timezone: localTime, calendar: isCalendar });
     setPollData((prevData) => ({
       ...prevData,
       questions,
