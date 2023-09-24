@@ -8,7 +8,7 @@ const OptionInput = ({ option, qIndex, oIndex, handleOptionChange, handleDateCha
         <label>
           Option {oIndex + 1} Date:
           <input
-            type="date"
+            type="datetime-local"
             name={`date-${qIndex}-${oIndex}`}
             value={option.date}
             onChange={(e) => handleDateChange(qIndex, oIndex, e.target.value)}
