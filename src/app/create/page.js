@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import CreatePoll from '../../components/CreatePoll';
+import CreatePoll from './CreatePoll';
 
 const CreatePollPage = () => {
   return (
