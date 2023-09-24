@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import { DateTime } from 'luxon';
 
+const timezones = Intl.supportedValuesOf("timeZone");
 const OptionInput = ({ option, qIndex, oIndex, handleOptionChange, handleDateChange, handleTimeChange, handleLengthChange, handleTimezoneChange, removeOption }) => {
   if (option.calendar) {
     return (
@@ -34,6 +34,20 @@ const OptionInput = ({ option, qIndex, oIndex, handleOptionChange, handleDateCha
             value={option.length}
             onChange={(e) => handleLengthChange(qIndex, oIndex, e.target.value)}
           />
+        </label>
+        <label>
+          Timezone:
+          <select
+            name={`timezone-${qIndex}-${oIndex}`}
+            value={option.timezone}
+            onChange={(e) => handleTimezoneChange(qIndex, oIndex, e.target.value)}
+          >
+            {timezones.map((tz) => (
+              <option key={tz} value={tz}>
+                {tz}
+              </option>
+            ))}
+          </select>
         </label>
         <button onClick={() => removeOption(qIndex, oIndex)}>Remove Option</button>
       </div>
