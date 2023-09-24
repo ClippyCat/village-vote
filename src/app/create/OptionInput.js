@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 
-const OptionInput = ({ option, qIndex, oIndex, handleOptionChange, handleDateChange, handleStartTimeChange, handleEndTimeChange, handleTimezoneChange, removeOption }) => {
+const OptionInput = ({ option, qIndex, oIndex, handleOptionChange, handleDateChange, handleTimeChange, handleLengthChange, handleTimezoneChange, removeOption }) => {
   if (option.calendar) {
     return (
       <div>
@@ -22,7 +22,7 @@ const OptionInput = ({ option, qIndex, oIndex, handleOptionChange, handleDateCha
             type="time"
             name={`time-${qIndex}-${oIndex}`}
             value={option.time}
-            onChange={(e) => handleDateChange(qIndex, oIndex, e.target.value)}
+            onChange={(e) => handleTimeChange(qIndex, oIndex, e.target.value)}
           />
         </label>
         <label>
@@ -31,7 +31,7 @@ const OptionInput = ({ option, qIndex, oIndex, handleOptionChange, handleDateCha
             type="number"
             name={`length-${qIndex}-${oIndex}`}
             value={option.length}
-            onChange={(e) => handleDateChange(qIndex, oIndex, e.target.value)}
+            onChange={(e) => handleLengthChange(qIndex, oIndex, e.target.value)}
           />
         </label>
         <button onClick={() => removeOption(qIndex, oIndex)}>Remove Option</button>
