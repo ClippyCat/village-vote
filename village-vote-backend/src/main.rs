@@ -5,73 +5,20 @@ use std::{net::SocketAddr, sync::Arc};
 use axum::{http::StatusCode, response::IntoResponse, routing::get, Router};
 
 use chrono::NaiveDate;
-use serde::{ser::SerializeStruct, Serialize};
+use serde::Serialize;
 use sqlx::{Pool, Sqlite};
 
 mod model;
 
-use model::{TimeZone, HHMM};
-
-enum OptionType {
-    Text(String),
-    Time {
-        date: NaiveDate,
-        time: HHMM,
-        // length in minutes
-        length: u16,
-        timezone: TimeZone,
-        calendar: bool,
-    },
-}
-
-impl Serialize for OptionType {
-    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        match self {
-            OptionType::Text(text) => serializer.serialize_str(text),
-            OptionType::Time {
-                date,
-                time,
-                length,
-                timezone,
-                calendar,
-            } => {
-                let mut s = serializer.serialize_struct("Time", 5)?;
-                s.serialize_field("date", date)?;
-                s.serialize_field("time", time)?;
-                s.serialize_field("length", length)?;
-                s.serialize_field("timezone", timezone)?;
-                s.serialize_field("calendar", calendar)?;
-                s.end()
-            }
-        }
-    }
-}
+use model::{OptionType, Options, Question, TimeZone, HHMM};
 
 #[derive(Serialize)]
-#[serde(tag = "type", content = "options")]
-#[serde(rename_all = "camelCase")]
-enum Options {
-    SingleSelect(Vec<OptionType>),
-    MultiSelect(Vec<OptionType>),
-    // Rank,
-}
-
-#[derive(Serialize)]
-struct Question {
-    text: String,
-    options: Options,
-}
-
-#[derive(Serialize)]
-struct Data {
+struct Poll {
     title: String,
     questions: Vec<Question>,
 }
 
-impl Default for Data {
+impl Default for Poll {
     fn default() -> Self {
         // const data = {
         //     title: "test",
@@ -212,7 +159,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .route(
             "/default_data",
             get(|| async {
-                let data = Data::default();
+                let data = Poll::default();
                 serde_json::to_string_pretty(&data).unwrap()
             }),
         )
@@ -232,7 +179,7 @@ mod tests {
 
     #[test]
     fn print_default_data() {
-        let data = super::Data::default();
+        let data = super::Poll::default();
         println!("{}", serde_json::to_string_pretty(&data).unwrap());
     }
 
