@@ -203,7 +203,16 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let state = ServerState {
         db_pool: Arc::new(pool),
     };
-    let router = Router::new().route("/", get(index)).with_state(state);
+    let router = Router::new()
+        .route("/", get(index))
+        .route(
+            "/default_data",
+            get(|| async {
+                let data = Data::default();
+                serde_json::to_string_pretty(&data).unwrap()
+            }),
+        )
+        .with_state(state);
     let addr = SocketAddr::from(([127, 0, 0, 1], 8000));
     println!("Listening on {addr}");
     axum::Server::bind(&addr)
