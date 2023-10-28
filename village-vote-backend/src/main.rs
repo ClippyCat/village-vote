@@ -12,7 +12,7 @@ mod model;
 
 use model::{TimeZone, HHMM};
 
-enum OptionKind {
+enum OptionType {
     Text(String),
     Time {
         date: NaiveDate,
@@ -24,14 +24,14 @@ enum OptionKind {
     },
 }
 
-impl Serialize for OptionKind {
+impl Serialize for OptionType {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
     where
         S: serde::Serializer,
     {
         match self {
-            OptionKind::Text(text) => serializer.serialize_str(text),
-            OptionKind::Time {
+            OptionType::Text(text) => serializer.serialize_str(text),
+            OptionType::Time {
                 date,
                 time,
                 length,
@@ -54,8 +54,8 @@ impl Serialize for OptionKind {
 #[serde(tag = "type", content = "options")]
 #[serde(rename_all = "camelCase")]
 enum Options {
-    SingleSelect(Vec<OptionKind>),
-    MultiSelect(Vec<OptionKind>),
+    SingleSelect(Vec<OptionType>),
+    MultiSelect(Vec<OptionType>),
     // Rank,
 }
 
@@ -132,22 +132,22 @@ impl Default for Data {
         let q1 = Question {
             text: "q1".to_string(),
             options: Options::SingleSelect(vec![
-                OptionKind::Text("a1".to_string()),
-                OptionKind::Text("a2".to_string()),
+                OptionType::Text("a1".to_string()),
+                OptionType::Text("a2".to_string()),
             ]),
         };
 
         let q2 = Question {
             text: "q2".to_string(),
             options: Options::SingleSelect(vec![
-                OptionKind::Time {
+                OptionType::Time {
                     date: NaiveDate::from_ymd_opt(2023, 10, 25).unwrap(),
                     time: HHMM { hh: 0, mm: 0 },
                     length: 30,
                     timezone: TimeZone::AmericaEdmonton,
                     calendar: true,
                 },
-                OptionKind::Time {
+                OptionType::Time {
                     date: NaiveDate::from_ymd_opt(2024, 2, 29).unwrap(),
                     time: HHMM { hh: 18, mm: 9 },
                     length: 420,
@@ -160,22 +160,22 @@ impl Default for Data {
         let q3 = Question {
             text: "q3".to_string(),
             options: Options::MultiSelect(vec![
-                OptionKind::Text("a1".to_string()),
-                OptionKind::Text("a2".to_string()),
+                OptionType::Text("a1".to_string()),
+                OptionType::Text("a2".to_string()),
             ]),
         };
 
         let q4 = Question {
             text: "q4".to_string(),
             options: Options::MultiSelect(vec![
-                OptionKind::Time {
+                OptionType::Time {
                     date: NaiveDate::from_ymd_opt(2030, 11, 11).unwrap(),
                     time: HHMM { hh: 23, mm: 0 },
                     length: 55,
                     timezone: TimeZone::AmericaEdmonton,
                     calendar: true,
                 },
-                OptionKind::Time {
+                OptionType::Time {
                     date: NaiveDate::from_ymd_opt(2024, 2, 29).unwrap(),
                     time: HHMM { hh: 18, mm: 9 },
                     length: 420,
@@ -195,6 +195,10 @@ impl Default for Data {
 #[derive(Clone)]
 pub struct ServerState {
     db_pool: Arc<Pool<Sqlite>>,
+}
+
+async fn index() -> impl IntoResponse {
+    (StatusCode::OK, "Hello :)".to_string())
 }
 
 #[tokio::main]
@@ -222,15 +226,24 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
-async fn index() -> impl IntoResponse {
-    (StatusCode::OK, "Hello :)".to_string())
-}
-
 #[cfg(test)]
 mod tests {
+    use sqlx::{pool, Pool, Sqlite};
+
     #[test]
     fn print_default_data() {
         let data = super::Data::default();
         println!("{}", serde_json::to_string_pretty(&data).unwrap());
+    }
+
+    #[tokio::test]
+    async fn print_all_polls() {
+        let pool: Pool<Sqlite> = pool::PoolOptions::new()
+            .max_connections(5)
+            .connect("polls.db")
+            .await
+            .unwrap();
+        let polls = super::db::dao::Poll::read_all(&pool).await.unwrap();
+        println!("{:?}", polls);
     }
 }
