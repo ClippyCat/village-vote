@@ -1,7 +1,9 @@
 use serde::Serialize;
 
 pub(crate) struct HHMM {
+    /// Hour (in army time)
     pub(crate) hh: u8,
+    /// Minute
     pub(crate) mm: u8,
 }
 
