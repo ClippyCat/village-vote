@@ -3,6 +3,9 @@ use serde::{ser::SerializeStruct, Serialize};
 
 use super::{TimeZone, HHMM};
 
+/// Represents the type of the response option for a question.
+///
+/// Its name was chosen by its role in the JSON data.
 pub(crate) enum OptionType {
     Text(String),
     Time {

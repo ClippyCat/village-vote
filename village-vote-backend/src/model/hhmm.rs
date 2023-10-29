@@ -1,5 +1,6 @@
 use serde::Serialize;
 
+/// Time of the day in `HH:MM` format.
 pub(crate) struct HHMM {
     /// Hour (in army time)
     pub(crate) hh: u8,
