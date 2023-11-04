@@ -61,13 +61,13 @@ const Vote = () => {
   return (
     <div>
       <h1>{data.title}</h1>
-      {data.questions.map((question, index) => (
-        <div key={index}>
+      {data.questions.map((question, qIndex) => (
+        <div key={qIndex}>
           <h2>{question.text}</h2>
           {question.type === "singleSelect" ? (
-            <SingleSelectOptions options={question.options} />
+            <SingleSelectOptions qIndex={qIndex} options={question.options} />
           ) : question.type === "multiSelect" ? (
-            <MultiSelectOptions options={question.options} />
+            <MultiSelectOptions qIndex={qIndex} options={question.options} />
           ) : null}
         </div>
       ))}
@@ -75,12 +75,12 @@ const Vote = () => {
   );
 };
 
-const SingleSelectOptions = ({ options }) => {
+const SingleSelectOptions = ({ qIndex, options }) => {
   return (
     <div>
-      {options.map((option, index) => (
-        <label key={index}>
-          <input type="radio" name={index} value={option} />
+      {options.map((option, oIndex) => (
+        <label key={oIndex}>
+          <input type="radio" name={`q${qIndex}`} value={option} />
           {typeof option === "object"
             ? `${option.date} ${option.time}`
             : option}
@@ -90,12 +90,12 @@ const SingleSelectOptions = ({ options }) => {
   );
 };
 
-const MultiSelectOptions = ({ options }) => {
+const MultiSelectOptions = ({ qIndex, options }) => {
   return (
     <div>
       {options.map((option, index) => (
         <label key={index}>
-          <input type="checkbox" name={index} value={option} />
+          <input type="checkbox" name={`q${qIndex}`} value={option} />
           {typeof option === "object"
             ? `${option.date} ${option.time}`
             : option}
