@@ -2,14 +2,24 @@ use sqlx::FromRow;
 
 #[derive(FromRow, Debug)]
 pub(crate) struct Poll {
-    id: i64,
-    name: String,
+    pub(super) id: i64,
+    pub(super) name: String,
 }
 
 impl Poll {
     pub async fn read_all(pool: &sqlx::Pool<sqlx::Sqlite>) -> Result<Vec<Poll>, sqlx::Error> {
         sqlx::query_as::<_, Poll>("SELECT * FROM poll")
             .fetch_all(pool)
+            .await
+    }
+
+    pub async fn read_single(
+        pool: &sqlx::Pool<sqlx::Sqlite>,
+        id: i64,
+    ) -> Result<Poll, sqlx::Error> {
+        sqlx::query_as::<_, Poll>("SELECT * FROM poll WHERE id = ?")
+            .bind(id)
+            .fetch_one(pool)
             .await
     }
 }
@@ -82,13 +92,27 @@ impl RankQuestion {
 #[derive(FromRow, Debug)]
 pub(crate) struct Question {
     id: i64,
+    poll_id: i64,
     text: String,
-    question_type: i64,
+    // Question type acts as a discriminator for the question
+    // and the foreign_id.
+    pub(crate) question_type: i64,
+    foreign_id: i64,
 }
 
 impl Question {
     pub async fn read_all(pool: &sqlx::Pool<sqlx::Sqlite>) -> Result<Vec<Question>, sqlx::Error> {
         sqlx::query_as::<_, Question>("SELECT * FROM question")
+            .fetch_all(pool)
+            .await
+    }
+
+    pub async fn read_all_for_poll_id(
+        pool: &sqlx::Pool<sqlx::Sqlite>,
+        poll_id: i64,
+    ) -> Result<Vec<Question>, sqlx::Error> {
+        sqlx::query_as::<_, Question>("SELECT * FROM question WHERE poll_id = ?")
+            .bind(poll_id)
             .fetch_all(pool)
             .await
     }
