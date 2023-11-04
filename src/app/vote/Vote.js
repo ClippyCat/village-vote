@@ -80,7 +80,7 @@ const SingleSelectOptions = ({ options }) => {
     <div>
       {options.map((option, index) => (
         <label key={index}>
-          <input type="radio" name={`singleSelectOption`} value={option} />
+          <input type="radio" name={index} value={option} />
           {typeof option === "object"
             ? `${option.date} ${option.time}`
             : option}
@@ -95,7 +95,7 @@ const MultiSelectOptions = ({ options }) => {
     <div>
       {options.map((option, index) => (
         <label key={index}>
-          <input type="checkbox" name={`multiSelectOption`} value={option} />
+          <input type="checkbox" name={index} value={option} />
           {typeof option === "object"
             ? `${option.date} ${option.time}`
             : option}
