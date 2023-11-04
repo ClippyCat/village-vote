@@ -1,12 +1,10 @@
 "use client";
 import React, { useState } from "react";
 
-const localTime = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
 const PollStateManagement = ({ children }) => {
   const [pollData, setPollData] = useState({
     title: "",
-    questions: [{ text: "", options: [{ date: "", time: "", length: "", timezone: "" }] }],
+    questions: [{type: "singleSelect", text: "option 1", options: [""]}],
   });
 
   const handleInputChange = (name, value) => {
@@ -34,15 +32,6 @@ const PollStateManagement = ({ children }) => {
     }));
   };
 
-  const handleCalendarChange = (qIndex, isChecked) => {
-    const questions = [...pollData.questions];
-    questions[qIndex].calendar = isChecked;
-    setPollData((prevData) => ({
-      ...prevData,
-      questions,
-    }));
-  };
-
   const handleOptionChange = (qIndex, oIndex, option) => {
     const questions = [...pollData.questions];
     questions[qIndex].options[oIndex] = option;
@@ -52,44 +41,8 @@ const PollStateManagement = ({ children }) => {
     }));
   };
 
-  const handleDateChange = (qIndex, oIndex, date) => {
-    const questions = [...pollData.questions];
-    questions[qIndex].options[oIndex].date = date;
-    setPollData((prevData) => ({
-      ...prevData,
-      questions,
-    }));
-  };
-
-  const handleTimeChange = (qIndex, oIndex, time) => {
-    const questions = [...pollData.questions];
-    questions[qIndex].options[oIndex].time = time;
-    setPollData((prevData) => ({
-      ...prevData,
-      questions,
-    }));
-  };
-
-  const handleLengthChange = (qIndex, oIndex, length) => {
-    const questions = [...pollData.questions];
-    questions[qIndex].options[oIndex].length = length;
-    setPollData((prevData) => ({
-      ...prevData,
-      questions,
-    }));
-  };
-
-  const handleTimezoneChange = (qIndex, oIndex, timezone) => {
-    const questions = [...pollData.questions];
-    questions[qIndex].options[oIndex].timezone = timezone;
-    setPollData((prevData) => ({
-      ...prevData,
-      questions,
-    }));
-  };
-
   const addQuestion = () => {
-    const questions = [...pollData.questions, { text: "", options: [{ date: "", time: "", length: "", timezone: "" }] }];
+    const questions = [...pollData.questions, { text: "", options: [] }];
     setPollData((prevData) => ({
       ...prevData,
       questions,
@@ -107,9 +60,9 @@ const PollStateManagement = ({ children }) => {
     }
   };
 
-  const addOption = (qIndex, isCalendar) => {
+  const addOption = (qIndex) => {
     const questions = [...pollData.questions];
-    questions[qIndex].options.push({ date: "", time: "", length: "", timezone: localTime, calendar: isCalendar });
+    questions[qIndex].options.push();
     setPollData((prevData) => ({
       ...prevData,
       questions,
@@ -133,13 +86,7 @@ const PollStateManagement = ({ children }) => {
         pollData,
         handleInputChange,
         handleQuestionChange,
-        handleQuestionTypeChange,
-        handleCalendarChange,
         handleOptionChange,
-        handleDateChange,
-        handleTimeChange,
-        handleLengthChange,
-        handleTimezoneChange,
         addQuestion,
         removeQuestion,
         addOption,

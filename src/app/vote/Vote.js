@@ -6,55 +6,15 @@ const data = {
   questions: [
     {
       text: "q1",
-      options: ["a1", "a2"],
-      type: "singleSelect",
+      options: ["a1", "a2", "a3"],
+      type: "multiSelect",
     },
     {
       text: "q2",
-      options: [
-        {
-          date: "2023-10-25",
-          time: "00:00",
-          length: "30",
-          timezone: "America/Edmonton",
-          calendar: true,
-        },
-        {
-          date: "2024-02-29",
-          time: "18:09",
-          length: "420",
-          timezone: "America/Edmonton",
-          calendar: true,
-        },
-      ],
+      options: ["b1", "b2"],
       type: "singleSelect",
     },
-    {
-      text: "q3",
-      options: ["a1", "a2"],
-      type: "multiSelect",
-    },
-    {
-      text: "q4",
-      options: [
-        {
-          date: "2030-11-11",
-          time: "23:00",
-          length: "55",
-          timezone: "America/Edmonton",
-          calendar: true,
-        },
-        {
-          date: "2024-02-29",
-          time: "18:09",
-          length: "420",
-          timezone: "America/Edmonton",
-          calendar: true,
-        },
-      ],
-      type: "multiSelect",
-    },
-  ],
+  ]
 };
 
 const Vote = () => {
@@ -81,9 +41,6 @@ const SingleSelectOptions = ({ qIndex, options }) => {
       {options.map((option, oIndex) => (
         <label key={oIndex}>
           <input type="radio" name={`q${qIndex}`} value={option} />
-          {typeof option === "object"
-            ? `${option.date} ${option.time}`
-            : option}
         </label>
       ))}
     </div>
@@ -96,9 +53,6 @@ const MultiSelectOptions = ({ qIndex, options }) => {
       {options.map((option, index) => (
         <label key={index}>
           <input type="checkbox" name={`q${qIndex}`} value={option} />
-          {typeof option === "object"
-            ? `${option.date} ${option.time}`
-            : option}
         </label>
       ))}
     </div>

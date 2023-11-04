@@ -13,13 +13,7 @@ const CreatePoll = () => {
         pollData,
         handleInputChange,
         handleQuestionChange,
-        handleQuestionTypeChange,
-        handleCalendarChange,
         handleOptionChange,
-        handleDateChange,
-        handleTimeChange,
-        handleLengthChange,
-        handleTimezoneChange,
         addQuestion,
         removeQuestion,
         addOption,
@@ -34,8 +28,6 @@ const CreatePoll = () => {
                 question={question}
                 qIndex={qIndex}
                 handleQuestionChange={handleQuestionChange}
-                handleQuestionTypeChange={handleQuestionTypeChange}
-                handleCalendarChange={handleCalendarChange}
               />
 
               {question.options.map((option, oIndex) => (
@@ -45,16 +37,11 @@ const CreatePoll = () => {
                     qIndex={qIndex}
                     oIndex={oIndex}
                     handleOptionChange={handleOptionChange}
-                    handleDateChange={handleDateChange}
-                    handleTimeChange={handleTimeChange}
-                    handleLengthChange={handleLengthChange}
-                    handleTimezoneChange={handleTimezoneChange}
                     removeOption={removeOption}
                   />
                 ))}
 
               <button onClick={() => addOption(qIndex, false)}>Add Option</button>
-              <button onClick={() => addOption(qIndex, true)}>Add Date Option</button>
               {qIndex > 0 && (
                 <button onClick={() => removeQuestion(qIndex)}>Remove Question</button>
               )}
