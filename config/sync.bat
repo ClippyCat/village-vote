@@ -1,0 +1,3 @@
+cd C:\Users\Melody\Desktop\bs\programming\myrepo\village-vote
+git push -u origin main
+ssh arch@clippycat.ca "cd village-vote; git pull origin main --rebase; systemctl restart village-vote"
