@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 
-const OptionInput = ({ option, qIndex, oIndex, handleOptionChange, removeOption }) => {
+const OptionInput = ({ option, qIndex, oIndex, handleOptionChange, addOption, removeOption }) => {
 
     return (
       <div>

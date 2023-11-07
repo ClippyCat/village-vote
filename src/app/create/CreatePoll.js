@@ -41,7 +41,7 @@ const CreatePoll = () => {
                   />
                 ))}
 
-              <button onClick={() => addOption(qIndex, false)}>Add Option</button>
+              <button onClick={() => addOption(qIndex)}>Add Option</button>
               {qIndex > 0 && (
                 <button onClick={() => removeQuestion(qIndex)}>Remove Question</button>
               )}

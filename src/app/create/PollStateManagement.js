@@ -62,7 +62,7 @@ const PollStateManagement = ({ children }) => {
 
   const addOption = (qIndex) => {
     const questions = [...pollData.questions];
-    questions[qIndex].options.push();
+    questions[qIndex].options.push("");
     setPollData((prevData) => ({
       ...prevData,
       questions,
