@@ -13,6 +13,7 @@ const CreatePoll = () => {
         pollData,
         handleInputChange,
         handleQuestionChange,
+        handleQuestionTypeChange,
         handleOptionChange,
         addQuestion,
         removeQuestion,
@@ -28,6 +29,7 @@ const CreatePoll = () => {
                 question={question}
                 qIndex={qIndex}
                 handleQuestionChange={handleQuestionChange}
+                handleQuestionTypeChange={handleQuestionTypeChange}
               />
 
               {question.options.map((option, oIndex) => (

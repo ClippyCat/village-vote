@@ -4,7 +4,7 @@ import React, { useState } from "react";
 const PollStateManagement = ({ children }) => {
   const [pollData, setPollData] = useState({
     title: "",
-    questions: [{type: "singleSelect", text: "option 1", options: [""]}],
+    questions: [{type: "singleSelect", text: "", options: [""]}],
   });
 
   const handleInputChange = (name, value) => {
@@ -86,6 +86,7 @@ const PollStateManagement = ({ children }) => {
         pollData,
         handleInputChange,
         handleQuestionChange,
+        handleQuestionTypeChange,
         handleOptionChange,
         addQuestion,
         removeQuestion,
