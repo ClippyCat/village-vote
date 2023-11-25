@@ -4,7 +4,7 @@ import Head from 'next/head';
 import CreatePoll from './CreatePoll';
 
 const SubmitPoll = () => {
-  const [formData, setFormData] = useState({}); // Initialize formData state
+  const [formData, setFormData] = useState({});
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
