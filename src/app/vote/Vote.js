@@ -1,29 +1,21 @@
 "use client";
-import React, { useState } from "react";
-
-//Sample Data
-const data = {
-  title: "test",
-  questions: [
-    {
-      text: "q1",
-      options: ["a1", "a2", "a3"],
-      type: "multiSelect",
-    },
-    {
-      text: "q2",
-      options: ["b1", "b2"],
-      type: "singleSelect",
-    },
-    {
-      text: "q3",
-      options: ["r1", "r2", "r3", "r4"],
-      type: "rank",
-    },
-  ]
-};
+import React, { useState, useEffect } from 'react';
 
 const Vote = () => {
+  const [data, setData] = useState({ title: '', questions: [] });
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:5000/')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => setData(data))
+      .catch((error) => console.error('Error:', error));
+  }, []);
+
   return (
     <div>
       <h1>{data.title}</h1>

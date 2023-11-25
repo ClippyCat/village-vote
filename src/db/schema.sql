@@ -19,5 +19,5 @@ CREATE TABLE Options (
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	questionId INTEGER,
 	text TEXT,
-	FOREIGN KEY (questionsId) REFERENCES Question(id)
+	FOREIGN KEY (questionId) REFERENCES Question(id)
 );

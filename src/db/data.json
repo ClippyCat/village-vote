@@ -1,0 +1,29 @@
+{
+  "title": "TestTitle",
+  "questions": [
+    {
+      "type": "singleSelect",
+      "text": "q1",
+      "options": [
+        "q1o1",
+        "q1o2"
+      ]
+    },
+    {
+      "text": "q2",
+      "options": [
+        "q2o1",
+        "q2o2"
+      ],
+      "type": "multiSelect"
+    },
+    {
+      "text": "q3",
+      "options": [
+        "q3o1",
+        "q3o2"
+      ],
+      "type": "rank"
+    }
+  ]
+}
