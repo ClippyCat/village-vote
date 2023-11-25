@@ -6,11 +6,11 @@ const VotePage = () => {
   return (
     <div>
       <Head>
-        <title> Vote Now -- Village Vote </title>
+        <title> Find A Poll -- Village Vote </title>
       </Head>
       <main>
         <h1>Test list</h1>
-        <Vote/>
+        <List/>
       </main>
     </div>
   );
