@@ -29,7 +29,7 @@ for question in data["questions"]:
 		options = question["options"]
 		options_data = [(question_id, option) for option in options]
 		cur.executemany('INSERT INTO Options (questionId, text) VALUES (?, ?)', options_data)
-
+init.commit()
 ###
 # Retrieve and print data from the Polls table
 cur.execute('SELECT * FROM Polls')
@@ -51,6 +51,5 @@ options_data = cur.fetchall()
 print("\nOptions Table:")
 for option in options_data:
     print(option)
-# Commit changes and close connection
-init.commit()
+
 init.close()
