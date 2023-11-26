@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import CreatePollHeader from "./CreatePollHeader";
 import QuestionInput from "./QuestionInput";
 import OptionInput from "./OptionInput";
-import ExportJSON from "./ExportJSON";
 import PollStateManagement from "./PollStateManagement";
 
 const CreatePoll = () => {
@@ -51,7 +50,6 @@ const CreatePoll = () => {
           ))}
 
           <button onClick={() => addQuestion()}>Add Question</button>
-          <ExportJSON data={pollData} />
         </div>
       )}
     </PollStateManagement>
