@@ -7,24 +7,38 @@ from connection import connection
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/')
-def voting():
+@app.route('/list/')
+def pollList():
+	conn = connection()
+	cur = conn.cursor()
+	cur.execute('SELECT * FROM polls')
+	# Fetch all rows
+	rows = cur.fetchall()
+	# Convert Row objects to dictionaries
+	polls = [dict(row) for row in rows]
+	conn.close()
+	return jsonify(polls)
+
+
+@app.route('/poll/<id>')
+def voting(id):
     conn = connection()
     cur = conn.cursor()
+    current_poll = None
     try:
-        cur.execute('''
+        cur.execute(f'''
             SELECT Polls.title AS poll_title,
             Questions.type AS question_type, Questions.text AS question_text,
             GROUP_CONCAT(Options.text, '|') AS options_text
             FROM Polls
             JOIN Questions ON Polls.id = Questions.pollId
             LEFT JOIN Options ON Questions.id = Options.questionId
+            WHERE Polls.id = {id}
             GROUP BY Polls.title, Questions.id
         ''')
         
         rows = cur.fetchall()
         
-        polls = []
         current_poll = None
         
         for row in rows:
@@ -35,7 +49,6 @@ def voting():
                     'title': poll_title,
                     'questions': []
                 }
-                polls.append(current_poll)
             
             question = {
                 'text': question_text,
@@ -49,7 +62,7 @@ def voting():
             current_poll['questions'].append(question)
         
         conn.close()
-        return jsonify(polls)
+        return jsonify(current_poll)
     
     except sqlite3.Error as e:
         print("Error fetching data:", e)
