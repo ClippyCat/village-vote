@@ -1,12 +1,13 @@
 "use client";
 import { useEffect, useState } from 'react';
 import Link from 'next/link'; // Import Link from Next.js
+import BASE_URL from '../config';
 
 const List = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/list/')
+    fetch(BASE_URL + '/list/')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
