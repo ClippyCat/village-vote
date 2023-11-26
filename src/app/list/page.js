@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Vote from "./Vote";
 import List from "./List";
 
 const VotePage = () => {

@@ -1,11 +1,12 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 
-const Vote = () => {
+const Vote = (props) => {
+  const { id } = props;
   const [data, setData] = useState({ title: '', questions: [] });
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/')
+    fetch('http://127.0.0.1:5000/poll/' + id)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');

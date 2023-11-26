@@ -1,16 +1,19 @@
+"use client";
 import Head from 'next/head';
 import Vote from "./Vote";
-import List from "./List";
+import { useParams } from 'next/navigation';
 
-const VotePage = () => {
+const VotePage = (props) => {
+  const { id } = props.searchParams;
+
   return (
     <div>
       <Head>
         <title> Vote Now -- Village Vote </title>
       </Head>
       <main>
-        <h1>Test list</h1>
-        <Vote/>
+        <h1>Vote Now!</h1>
+        <Vote id={id}/>
       </main>
     </div>
   );
