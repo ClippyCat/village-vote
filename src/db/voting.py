@@ -69,5 +69,16 @@ def voting(id):
 		conn.close()
 		return jsonify({'error': 'Error fetching data'}), 500
 
+
+@app.route('/create', methods=['POST'])
+def create_poll():
+    try:
+        data = request.get_json()
+        print("Received data:", data)
+        # Return a success message or status code
+        return jsonify({"message": "Poll data received and processed successfully"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 if __name__ == '__main__':
 	app.run(debug=True)
